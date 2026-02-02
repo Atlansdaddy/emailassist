@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>Field Emailer</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Config Screen -->
+    <div id="config-screen" class="screen">
+      <div class="screen-header">
+        <h1>Setup</h1>
+        <p class="subtitle">Configure your details once, then you're good to go.</p>
+      </div>
+      <form id="config-form">
+        <div class="form-group">
+          <label for="cfg-name">Your Name</label>
+          <input type="text" id="cfg-name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="cfg-email">Your Email</label>
+          <input type="email" id="cfg-email" placeholder="you@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="cfg-client">Client</label>
+          <input type="text" id="cfg-client" placeholder="Client name" required>
+        </div>
+        <div class="form-group">
+          <label for="cfg-jobsite">Jobsite Location</label>
+          <input type="text" id="cfg-jobsite" placeholder="123 Main St, City, ST" required>
+        </div>
+        <button type="submit" class="btn btn-save">Save & Continue</button>
+      </form>
+    </div>
+
+    <!-- Main Screen -->
+    <div id="main-screen" class="screen hidden">
+      <div class="screen-header">
+        <div class="header-row">
+          <h1>Field Emailer</h1>
+          <button id="btn-settings" class="btn-icon" aria-label="Settings">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 008.6 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 8.6a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+          </button>
+        </div>
+        <div id="job-info" class="job-info"></div>
+      </div>
+
+      <div class="button-grid">
+        <button id="btn-start" class="btn btn-action btn-start">
+          <div class="btn-icon-large">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <span class="btn-label">Start of Day</span>
+          <span class="btn-desc">Arrival check-in</span>
+        </button>
+
+        <button id="btn-delay" class="btn btn-action btn-delay">
+          <div class="btn-icon-large">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <span class="btn-label">Delay</span>
+          <span class="btn-desc">Report a delay</span>
+        </button>
+
+        <button id="btn-end" class="btn btn-action btn-end">
+          <div class="btn-icon-large">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </div>
+          <span class="btn-label">End of Day</span>
+          <span class="btn-desc">Wrap-up & leave</span>
+        </button>
+      </div>
+
+      <div id="email-log" class="email-log">
+        <h3>Today's Log</h3>
+        <div id="log-entries" class="log-entries">
+          <p class="log-empty">No emails sent today.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delay Modal -->
+    <div id="delay-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Delay Report</h2>
+        <div class="form-group">
+          <label for="delay-reason">Reason for delay</label>
+          <textarea id="delay-reason" rows="3" placeholder="Weather, equipment, waiting on access..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button id="delay-cancel" class="btn btn-cancel">Cancel</button>
+          <button id="delay-send" class="btn btn-confirm">Send Report</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

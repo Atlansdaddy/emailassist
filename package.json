@@ -1,0 +1,9 @@
+{
+  "name": "field-emailer",
+  "version": "1.0.0",
+  "description": "One-tap field emails for Safety Net job sites",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
