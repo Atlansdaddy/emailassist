@@ -3,23 +3,32 @@ set -e
 
 echo "=== Setting up Field Emailer ==="
 
-# Copy nginx config
-cp /opt/emailassist/nginx.conf /etc/nginx/sites-available/emailer
-ln -sf /etc/nginx/sites-available/emailer /etc/nginx/sites-enabled/emailer
+# Backup Caddyfile first
+cp /etc/caddy/Caddyfile /etc/caddy/Caddyfile.bak
+echo "=== Caddyfile backed up ==="
 
-# Test nginx
-nginx -t
+# Only add emailer block if it doesn't already exist
+if ! grep -q "emailer.dasgas.com" /etc/caddy/Caddyfile; then
+  echo '' >> /etc/caddy/Caddyfile
+  echo 'emailer.dasgas.com {' >> /etc/caddy/Caddyfile
+  echo '    reverse_proxy localhost:3000' >> /etc/caddy/Caddyfile
+  echo '}' >> /etc/caddy/Caddyfile
+  echo "=== Caddy config added ==="
+else
+  echo "=== Caddy config already exists, skipping ==="
+fi
 
-# Reload nginx
-systemctl reload nginx
-echo "=== Nginx configured ==="
+# Test caddy config
+caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+echo "=== Caddy config valid ==="
 
-# SSL cert
-certbot --nginx -d emailer.dasgas.com --non-interactive --agree-tos -m jviruet83@gmail.com
-echo "=== SSL configured ==="
+# Reload caddy
+systemctl reload caddy
+echo "=== Caddy reloaded ==="
 
 # Kill any existing node process on port 3000
 fuser -k 3000/tcp 2>/dev/null || true
+sleep 1
 
 # Start the app with nohup so it survives terminal close
 cd /opt/emailassist
