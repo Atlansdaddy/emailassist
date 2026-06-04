@@ -87,12 +87,200 @@
           <span class="btn-label">End of Day</span>
           <span class="btn-desc">Wrap-up & leave</span>
         </button>
+
+        <button id="btn-inventory" class="btn btn-action btn-inventory">
+          <div class="btn-icon-large">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+              <rect x="9" y="3" width="6" height="4" rx="1"/>
+              <line x1="9" y1="12" x2="15" y2="12"/>
+              <line x1="9" y1="16" x2="15" y2="16"/>
+            </svg>
+          </div>
+          <span class="btn-label">Inventory</span>
+          <span class="btn-desc">Update inventory</span>
+        </button>
+
+        <button id="btn-chassis" class="btn btn-action btn-chassis">
+          <div class="btn-icon-large">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="22" height="18" rx="2"/>
+              <line x1="1" y1="9" x2="23" y2="9"/>
+              <circle cx="6" cy="15" r="2"/>
+              <circle cx="18" cy="15" r="2"/>
+            </svg>
+          </div>
+          <span class="btn-label">Chassis</span>
+          <span class="btn-desc">Chassis inventory log</span>
+        </button>
+
+        <button id="btn-escalation" class="btn btn-action btn-escalation">
+          <div class="btn-icon-large">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span class="btn-label">Escalation</span>
+          <span class="btn-desc">Escalate an issue</span>
+        </button>
       </div>
 
       <div id="email-log" class="email-log">
         <h3>Today's Log</h3>
         <div id="log-entries" class="log-entries">
           <p class="log-empty">No emails sent today.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chassis Inventory Screen -->
+    <div id="chassis-screen" class="screen hidden">
+      <div class="screen-header">
+        <div class="header-row">
+          <button id="chassis-back" class="btn-icon" aria-label="Back">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <h1>Chassis Inventory</h1>
+          <button id="chassis-export" class="btn-icon btn-export" aria-label="Export">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </button>
+        </div>
+        <div id="chassis-stats" class="chassis-stats">
+          <span class="stat stat-total"><span id="stat-total">0</span> Total</span>
+          <span class="stat stat-pass"><span id="stat-pass">0</span> Pass</span>
+          <span class="stat stat-fail"><span id="stat-fail">0</span> Fail</span>
+          <span class="stat stat-hw"><span id="stat-hw">0</span> HW</span>
+        </div>
+      </div>
+
+      <form id="chassis-form" class="chassis-form">
+        <div class="form-group">
+          <label for="chassis-id">Chassis ID</label>
+          <input type="text" id="chassis-id" placeholder="Enter chassis ID" autocomplete="off" autocapitalize="characters" required>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-group">
+            <label>Hardwire</label>
+            <div class="toggle-buttons" id="toggle-hardwire">
+              <button type="button" class="toggle-btn active" data-value="NO HW">NO HW</button>
+              <button type="button" class="toggle-btn" data-value="HARDWIRE">HARDWIRE</button>
+            </div>
+          </div>
+          <div class="toggle-group">
+            <label>Loaded</label>
+            <div class="toggle-buttons" id="toggle-loaded">
+              <button type="button" class="toggle-btn active" data-value="EMPTY">EMPTY</button>
+              <button type="button" class="toggle-btn" data-value="LOADED">LOADED</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="toggle-group toggle-group-full">
+          <label>Status</label>
+          <div class="toggle-buttons toggle-status" id="toggle-status">
+            <button type="button" class="toggle-btn toggle-pass active" data-value="PASS">PASS</button>
+            <button type="button" class="toggle-btn toggle-fail" data-value="FAIL">FAIL</button>
+          </div>
+        </div>
+
+        <div id="flash-count-section" class="form-group hidden">
+          <label>Flash Count</label>
+          <div class="flash-grid" id="flash-grid">
+            <button type="button" class="flash-btn" data-value="1">1</button>
+            <button type="button" class="flash-btn" data-value="2">2</button>
+            <button type="button" class="flash-btn" data-value="3">3</button>
+            <button type="button" class="flash-btn" data-value="4">4</button>
+            <button type="button" class="flash-btn" data-value="5">5</button>
+            <button type="button" class="flash-btn" data-value="6">6</button>
+            <button type="button" class="flash-btn" data-value="7">7</button>
+            <button type="button" class="flash-btn" data-value="8">8</button>
+            <button type="button" class="flash-btn" data-value="9">9</button>
+            <button type="button" class="flash-btn" data-value="10">10</button>
+          </div>
+          <input type="number" id="flash-manual" min="1" max="99" placeholder="Or enter manually">
+        </div>
+
+        <div class="form-group">
+          <label for="chassis-notes">Notes (optional)</label>
+          <input type="text" id="chassis-notes" placeholder="Any notes...">
+        </div>
+
+        <button type="submit" id="chassis-submit" class="btn btn-save">Log Chassis</button>
+      </form>
+
+      <div class="chassis-entries">
+        <h3>Logged Entries</h3>
+        <div id="chassis-list" class="chassis-list">
+          <p class="log-empty">No chassis logged yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chassis Edit Modal -->
+    <div id="chassis-edit-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Edit Entry</h2>
+        <input type="hidden" id="edit-index">
+        <div class="form-group">
+          <label for="edit-chassis-id">Chassis ID</label>
+          <input type="text" id="edit-chassis-id" autocapitalize="characters">
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-group">
+            <label>Hardwire</label>
+            <div class="toggle-buttons" id="edit-toggle-hardwire">
+              <button type="button" class="toggle-btn" data-value="NO HW">NO HW</button>
+              <button type="button" class="toggle-btn" data-value="HARDWIRE">HARDWIRE</button>
+            </div>
+          </div>
+          <div class="toggle-group">
+            <label>Loaded</label>
+            <div class="toggle-buttons" id="edit-toggle-loaded">
+              <button type="button" class="toggle-btn" data-value="EMPTY">EMPTY</button>
+              <button type="button" class="toggle-btn" data-value="LOADED">LOADED</button>
+            </div>
+          </div>
+        </div>
+        <div class="toggle-group toggle-group-full">
+          <label>Status</label>
+          <div class="toggle-buttons toggle-status" id="edit-toggle-status">
+            <button type="button" class="toggle-btn toggle-pass" data-value="PASS">PASS</button>
+            <button type="button" class="toggle-btn toggle-fail" data-value="FAIL">FAIL</button>
+          </div>
+        </div>
+        <div id="edit-flash-count-section" class="form-group hidden">
+          <label>Flash Count</label>
+          <div class="flash-grid" id="edit-flash-grid">
+            <button type="button" class="flash-btn" data-value="1">1</button>
+            <button type="button" class="flash-btn" data-value="2">2</button>
+            <button type="button" class="flash-btn" data-value="3">3</button>
+            <button type="button" class="flash-btn" data-value="4">4</button>
+            <button type="button" class="flash-btn" data-value="5">5</button>
+            <button type="button" class="flash-btn" data-value="6">6</button>
+            <button type="button" class="flash-btn" data-value="7">7</button>
+            <button type="button" class="flash-btn" data-value="8">8</button>
+            <button type="button" class="flash-btn" data-value="9">9</button>
+            <button type="button" class="flash-btn" data-value="10">10</button>
+          </div>
+          <input type="number" id="edit-flash-manual" min="1" max="99" placeholder="Or enter manually">
+        </div>
+        <div class="form-group">
+          <label for="edit-chassis-notes">Notes</label>
+          <input type="text" id="edit-chassis-notes">
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="edit-cancel" class="btn btn-cancel">Cancel</button>
+          <button type="button" id="edit-save" class="btn btn-confirm">Save</button>
         </div>
       </div>
     </div>
@@ -109,6 +297,38 @@
         <div class="modal-actions">
           <button id="delay-cancel" class="btn btn-cancel">Cancel</button>
           <button id="delay-send" class="btn btn-confirm">Send Report</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory Modal -->
+    <div id="inventory-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Inventory Update</h2>
+        <div class="form-group">
+          <label for="inventory-items">Inventory Items</label>
+          <textarea id="inventory-items" rows="8" placeholder="80x AG Mini Y-ABS Cables&#10;75x Motive Asset Gateway Mini&#10;10x Packs - Zip Ties..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button id="inventory-cancel" class="btn btn-cancel">Cancel</button>
+          <button id="inventory-send" class="btn btn-confirm">Send Update</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Escalation Modal -->
+    <div id="escalation-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Escalation Report</h2>
+        <div class="form-group">
+          <label for="escalation-issue">Issue Description</label>
+          <textarea id="escalation-issue" rows="4" placeholder="Describe the issue that needs escalation..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button id="escalation-cancel" class="btn btn-cancel">Cancel</button>
+          <button id="escalation-send" class="btn btn-confirm btn-escalation-send">Send Escalation</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'field-emailer-v1';
+const CACHE_NAME = 'field-emailer-v5';
 const ASSETS = [
   '/',
   '/index.html',

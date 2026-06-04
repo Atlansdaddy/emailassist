@@ -198,6 +198,20 @@ html, body {
 }
 .btn-end .btn-icon-large { background: rgba(68,138,255,0.15); }
 
+.btn-inventory {
+  background: #1a1a2e;
+  color: #b388ff;
+  border: 1px solid rgba(179,136,255,0.15);
+}
+.btn-inventory .btn-icon-large { background: rgba(179,136,255,0.15); }
+
+.btn-escalation {
+  background: #2e0a0a;
+  color: var(--red);
+  border: 1px solid rgba(255,82,82,0.15);
+}
+.btn-escalation .btn-icon-large { background: rgba(255,82,82,0.15); }
+
 /* Modal */
 .modal {
   position: fixed;
@@ -244,6 +258,10 @@ html, body {
   padding: 14px;
   font-size: 1rem;
 }
+.btn-escalation-send {
+  background: var(--red);
+  color: #fff;
+}
 
 /* Email Log */
 .email-log {
@@ -280,6 +298,8 @@ html, body {
 .log-entry.type-start { border-left: 3px solid var(--green); }
 .log-entry.type-delay { border-left: 3px solid var(--orange); }
 .log-entry.type-end { border-left: 3px solid var(--blue); }
+.log-entry.type-inventory { border-left: 3px solid #b388ff; }
+.log-entry.type-escalation { border-left: 3px solid var(--red); }
 
 /* Toast */
 .toast {
@@ -300,4 +320,249 @@ html, body {
 @keyframes toast-in {
   from { opacity: 0; transform: translateX(-50%) translateY(10px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Chassis Button */
+.btn-chassis {
+  background: #1a2e1a;
+  color: #4caf50;
+  border: 1px solid rgba(76,175,80,0.15);
+}
+.btn-chassis .btn-icon-large { background: rgba(76,175,80,0.15); }
+
+/* Chassis Screen */
+#chassis-screen .header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#chassis-screen .header-row h1 {
+  flex: 1;
+  text-align: center;
+  margin-right: 42px;
+}
+.btn-export {
+  background: var(--green);
+  color: #000;
+}
+
+/* Chassis Stats */
+.chassis-stats {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.stat {
+  background: var(--surface);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.stat span {
+  font-weight: 700;
+}
+.stat-total { color: var(--text); }
+.stat-pass { color: var(--green); }
+.stat-fail { color: var(--red); }
+.stat-hw { color: var(--orange); }
+
+/* Chassis Form */
+.chassis-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Toggle Row */
+.toggle-row {
+  display: flex;
+  gap: 12px;
+}
+.toggle-row .toggle-group {
+  flex: 1;
+}
+.toggle-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.toggle-group-full {
+  width: 100%;
+}
+
+/* Toggle Buttons */
+.toggle-buttons {
+  display: flex;
+  gap: 6px;
+}
+.toggle-btn {
+  flex: 1;
+  padding: 14px 8px;
+  border: 2px solid var(--surface-2);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.toggle-btn:active {
+  transform: scale(0.97);
+}
+.toggle-btn.active {
+  border-color: var(--blue);
+  color: var(--text);
+  background: var(--blue-bg);
+}
+
+/* Status Toggle */
+.toggle-status .toggle-pass.active {
+  border-color: var(--green);
+  background: var(--green-bg);
+  color: var(--green);
+}
+.toggle-status .toggle-fail.active {
+  border-color: var(--red);
+  background: rgba(255,82,82,0.1);
+  color: var(--red);
+}
+
+/* Flash Count Grid */
+.flash-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.flash-btn {
+  padding: 16px 8px;
+  border: 2px solid var(--surface-2);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.flash-btn:active {
+  transform: scale(0.95);
+}
+.flash-btn.active {
+  border-color: var(--red);
+  background: rgba(255,82,82,0.1);
+  color: var(--red);
+}
+
+/* Chassis Entries List */
+.chassis-entries {
+  margin-top: 20px;
+}
+.chassis-entries h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.chassis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Chassis Entry Card */
+.chassis-entry {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 14px;
+  border-left: 4px solid var(--green);
+}
+.chassis-entry.status-fail {
+  border-left-color: var(--red);
+}
+.chassis-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.chassis-entry-id {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.chassis-entry-actions {
+  display: flex;
+  gap: 8px;
+}
+.chassis-entry-actions button {
+  background: var(--surface-2);
+  border: none;
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.chassis-entry-actions button:active {
+  transform: scale(0.95);
+}
+.chassis-entry-actions .btn-delete {
+  color: var(--red);
+}
+.chassis-entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.chassis-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.tag-pass { background: var(--green-bg); color: var(--green); }
+.tag-fail { background: rgba(255,82,82,0.1); color: var(--red); }
+.tag-hw { background: var(--orange-bg); color: var(--orange); }
+.tag-no-hw { background: var(--surface-2); color: var(--text-muted); }
+.tag-loaded { background: var(--blue-bg); color: var(--blue); }
+.tag-empty { background: var(--surface-2); color: var(--text-muted); }
+.tag-flash { background: rgba(255,82,82,0.1); color: var(--red); }
+
+.chassis-entry-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.chassis-entry-notes {
+  font-style: italic;
+  max-width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Edit Modal Adjustments */
+#chassis-edit-modal .toggle-row {
+  margin-bottom: 8px;
+}
+#chassis-edit-modal .form-group {
+  margin-bottom: 8px;
 }
