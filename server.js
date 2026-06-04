@@ -32,6 +32,4 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Field Emailer running at http://localhost:${PORT}`);
-});
+server.listen(PORT);

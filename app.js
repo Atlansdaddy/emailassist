@@ -63,7 +63,7 @@
 
   function saveLogEntry(type, time) {
     let data = {};
-    try { data = JSON.parse(localStorage.getItem(LOG_KEY)) || {}; } catch {}
+    try { data = JSON.parse(localStorage.getItem(LOG_KEY)) || {}; } catch (e) { console.warn('log read failed, resetting', e); }
     const key = todayKey();
     if (!data[key]) data[key] = [];
     data[key].push({ type, time });
